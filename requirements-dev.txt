@@ -183,7 +183,7 @@ rdflib[html]==7.6.0
     #   owlrl
     #   pyshacl
     #   roc-validator
-redis==8.0.1
+redis==8.1.0
     # via ro-crate-validation-service (pyproject.toml)
 requests==2.34.2
     # via
