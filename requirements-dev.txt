@@ -29,7 +29,7 @@ botocore==1.43.31
     #   boto3
     #   moto
     #   s3transfer
-build==1.5.0
+build==1.6.1
     # via pip-tools
 cattrs==26.1.0
     # via requests-cache
