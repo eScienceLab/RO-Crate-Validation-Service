@@ -145,9 +145,9 @@ py-partiql-parser==0.6.3
     # via moto
 pycparser==3.0
     # via cffi
-pydantic[email]==2.14.0b2
+pydantic[email]==2.13.5
     # via apiflask
-pydantic-core==2.49.0
+pydantic-core==2.46.5
     # via pydantic
 pygments==2.20.0
     # via
