@@ -166,7 +166,7 @@ six==1.17.0
     # via python-dateutil
 toml==0.10.2
     # via roc-validator
-typing-extensions==4.14.1
+typing-extensions==4.16.0
     # via
     #   cattrs
     #   enum-tools
