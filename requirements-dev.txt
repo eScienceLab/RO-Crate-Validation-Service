@@ -227,7 +227,7 @@ tzlocal==5.4.3
     # via celery
 url-normalize==3.0.0
     # via requests-cache
-urllib3==2.7.0
+urllib3==2.8.0
     # via
     #   botocore
     #   requests
