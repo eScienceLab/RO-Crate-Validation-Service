@@ -202,5 +202,5 @@ werkzeug==3.1.8
     # via
     #   flask
     #   ro-crate-validation-service (pyproject.toml)
-zipp==3.23.0
+zipp==4.1.0
     # via importlib-metadata
