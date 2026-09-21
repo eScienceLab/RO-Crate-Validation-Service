@@ -30,7 +30,7 @@ cattrs==25.1.1
     # via requests-cache
 celery==5.6.3
     # via ro-crate-validation-service (pyproject.toml)
-certifi==2025.8.3
+certifi==2026.7.22
     # via requests
 charset-normalizer==3.4.2
     # via requests

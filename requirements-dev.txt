@@ -35,7 +35,7 @@ cattrs==26.1.0
     # via requests-cache
 celery==5.6.3
     # via ro-crate-validation-service (pyproject.toml)
-certifi==2026.6.17
+certifi==2026.7.22
     # via requests
 cffi==2.1.0
     # via cryptography
