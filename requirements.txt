@@ -4,7 +4,7 @@
 #
 #    pip-compile --no-index --output-file=requirements.txt
 #
-amqp==5.3.1
+amqp==5.4.0
     # via kombu
 annotated-types==0.8.0
     # via pydantic
@@ -20,13 +20,13 @@ billiard==4.3.0
     # via celery
 blinker==1.9.0
     # via flask
-boto3==1.43.97
+boto3==1.43.104
     # via ro-crate-validation-service (pyproject.toml)
-botocore==1.43.97
+botocore==1.43.104
     # via
     #   boto3
     #   s3transfer
-cattrs==26.2.0
+cattrs==26.2.1
     # via requests-cache
 celery==5.6.3
     # via ro-crate-validation-service (pyproject.toml)
@@ -55,7 +55,7 @@ dnspython==2.8.0
     # via email-validator
 email-validator==2.3.0
     # via pydantic
-enum-tools==0.12.0
+enum-tools==0.13.0
     # via roc-validator
 flask==3.1.3
     # via
@@ -112,7 +112,7 @@ packaging==26.3
     #   webargs
 pfzy==0.3.4
     # via inquirerpy
-platformdirs==4.11.10
+platformdirs==4.12.1
     # via requests-cache
 prettytable==3.18.0
     # via pyshacl
@@ -122,13 +122,13 @@ prompt-toolkit==3.0.53
     #   inquirerpy
 pydantic[email]==2.13.5
     # via apiflask
-pydantic-core==2.46.5
+pydantic-core==2.48.0
     # via pydantic
 pygments==2.21.0
     # via
     #   enum-tools
     #   rich
-pyparsing==3.3.2
+pyparsing==3.3.3
     # via rdflib
 pyshacl==0.40.1
     # via roc-validator
@@ -152,7 +152,7 @@ requests==2.34.2
     #   roc-validator
 requests-cache==1.3.3
     # via roc-validator
-rich==13.9.4
+rich==15.0.0
     # via
     #   rich-click
     #   roc-validator
@@ -180,7 +180,7 @@ tzdata==2026.4
     # via kombu
 tzlocal==5.4.4
     # via celery
-url-normalize==3.0.0
+url-normalize==3.0.1
     # via requests-cache
 urllib3==2.8.0
     # via
@@ -192,13 +192,13 @@ vine==5.1.0
     #   amqp
     #   celery
     #   kombu
-wcwidth==0.8.4
+wcwidth==0.9.1
     # via
     #   prettytable
     #   prompt-toolkit
 webargs==8.7.1
     # via apiflask
-werkzeug==3.1.8
+werkzeug==3.1.9
     # via
     #   flask
     #   ro-crate-validation-service (pyproject.toml)
