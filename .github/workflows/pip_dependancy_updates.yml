@@ -1,0 +1,26 @@
+jobs:
+  test-update-requirements-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.9
+
+      - name: Update requirements files
+        uses: UW-GAC/pip-tools-actions/update-requirements-files@v1
+        with:
+          requirements_files:  |-
+            requirements.txt
+            requirements-dev.txt
+            
+            pr-commit-message: "Test update requirements files commit message"
+            pr-title: "Test update requirements files title"
+            pr-body: "Test update requirements files body"
+            pr-branch-suffix: "${{ github.event.number}}"
