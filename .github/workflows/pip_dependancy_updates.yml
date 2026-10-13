@@ -20,7 +20,7 @@ jobs:
           python-version: 3.9
 
       - name: Update requirements files
-        uses: UW-GAC/pip-tools-actions/update-requirements-files
+        uses: UW-GAC/pip-tools-actions/update-requirements-filesv0.2
         with:
           requirements_files:  |-
             requirements.txt
