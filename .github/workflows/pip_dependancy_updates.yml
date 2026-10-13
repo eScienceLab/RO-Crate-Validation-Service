@@ -1,3 +1,9 @@
+name: Pip dependency update
+
+on:
+  pull_request:
+    branches: [ develop ]
+
 jobs:
   test-update-requirements-files:
     runs-on: ubuntu-latest
