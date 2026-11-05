@@ -24,9 +24,8 @@ jobs:
         with:
           requirements_files:  |-
             requirements.txt
-            requirements-dev.txt
-            
-            pr-commit-message: "Test update requirements files commit message"
-            pr-title: "Test update requirements files title"
-            pr-body: "Test update requirements files body"
-            pr-branch-suffix: "${{ github.event.number}}"
+            requirements-dev.txt  
+          pr-commit-message: "Test update requirements files commit message"
+          pr-title: "Test update requirements files title"
+          pr-body: "Test update requirements files body"
+          pr-branch-suffix: "${{ github.event.number}}"
