@@ -14,10 +14,10 @@ This validates the contents of an `ro-crate-metadata.json` document and returns 
 | Field | Required | Description |
 |-------|----------|-------------|
 | `crate_json` | yes | The metadata document, as a JSON string |
-| `profile_name` | no | Profile to validate against, e.g. `ro-crate-1.2`. The validator will default to `ro-crate-1.1` when this is omitted |
+| `profile_name` | no | Profile to validate against, e.g. `ro-crate-1.2`. The validator will default to `ro-crate-1.3` when this is omitted |
 
 !!! warning
-    Currently, the validation profile is not detected from the RO-Crate. In other words, a `conformsTo` declaration in the metadata does not influence which validation profile is used by the validator, and the validation always runs against `profile_name`, or `ro-crate-1.1` when it is omitted.
+    Currently, the validation profile is not detected from the RO-Crate. In other words, a `conformsTo` declaration in the metadata does not influence which validation profile is used by the validator, and the validation always runs against `profile_name`, or `ro-crate-1.3` when it is omitted.
 
 To validate an ro-crate metadata file:
 
@@ -47,7 +47,7 @@ This queues validation of an RO-Crate held in the object store. The RO-Crate is 
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `profile_name` | no | Profile to validate against; defaults to `ro-crate-1.1` when omitted |
+| `profile_name` | no | Profile to validate against; defaults to `ro-crate-1.3` when omitted |
 | `webhook_url` | no | URL that receives the result when validation finishes |
 
 ```bash
@@ -101,7 +101,7 @@ An RO-Crate's `status` can be:
 | `error` | The validation could not run; the reason is in an `error` field. No `detail` field is provided |
 
 !!! note
-    `detail` contains the complete validation report. `created_at` is the UTC time of a stored-crate validation, and `null` for metadata-only validation, which does not set it. `profile` is the requested profile name, or `null` when the default (`ro-crate-1.1`) was used.
+    `detail` contains the complete validation report. `created_at` is the UTC time of a stored-crate validation, and `null` for metadata-only validation, which does not set it. `profile` is the requested profile name, or `null` when the default (`ro-crate-1.3`) was used.
 
 For stored RO-Crates the same object is saved to `{S3_RESULTS_PREFIX}/<id>.json` and returned by the GET endpoint.
 

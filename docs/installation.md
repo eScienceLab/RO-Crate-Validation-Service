@@ -102,10 +102,10 @@ The following can all be set as environment variables for the service using an `
 
 The validator comes with several RO-Crate profiles, and for the Five Safes RO-Crate, the prebuilt `ghcr.io/esciencelab/ro-crate-validation-service-fivesafes-profile` image has the `five-safes-crate` profile already included; see [Five Safes validation](five-safes.md).
 
-Other profiles can be provided by mounting the directory containing these profiles as a volume for the `flask` container. Mount the same directory as a volume for the `celery_worker` container as well if you have enabled stored-crate validation. Then set either the `EXTRA_PROFILES_PATH` or `PROFILES_PATH` environment variable to match the volume path. There is a working example in `docker-compose-develop.yml`.
+Other profiles can be provided by mounting the directory containing these profiles as a volume for the `flask` container. Mount the same directory as a volume for the `celery_worker` container as well if you have enabled stored-crate validation. Then set `EXTRA_PROFILES_PATH` to match the volume path so the bundled base profiles remain available. There is a working example in `docker-compose-develop.yml`.
 
 !!! note
-    `EXTRA_PROFILES_PATH` adds the directory to the bundled profiles, whereas `PROFILES_PATH` replaces them entirely. The two can be set together, in which case the validator takes profiles from both locations.
+    `EXTRA_PROFILES_PATH` adds the directory to the bundled profiles. Use `PROFILES_PATH` only when supplying a complete set of replacement profiles, including any base profiles your custom profiles depend on. The two can be set together, in which case the validator takes profiles from both locations.
 
 ## Offline validation
 
