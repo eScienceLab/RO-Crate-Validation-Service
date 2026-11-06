@@ -18,14 +18,14 @@ The `five-safes-crate` profile itself is defined in the [eScienceLab rocrate-val
 A [complete example crate](https://github.com/eScienceLab/rocrate-validator/blob/five-safes-0.7.4-beta/tests/data/crates/valid/five-safes-crate-result/ro-crate-metadata.json) is available in the fork's test data.
 
 !!! note
-    The current `-fivesafes-profile` image pairs the profile with a base profile for RO-Crate 1.1, whilst the profile itself expects RO-Crate 1.2. The walkthrough below mounts the matched profile set instead.
+    The repository's profile directory contains custom profiles that depend on the validator's bundled RO-Crate profiles. Use `EXTRA_PROFILES_PATH` to keep those base profiles available.
 
-For this walkthrough, run the service from a checkout of this repository, with the repository's profile set mounted in place of the bundled profiles:
+For this walkthrough, run the service from a checkout of this repository, with the repository's custom profiles mounted alongside the bundled profiles:
 
 ```bash
 docker run --rm -p 5001:5000 \
   -e FLASK_APP=wsgi.py \
-  -e PROFILES_PATH=/app/profiles \
+  -e EXTRA_PROFILES_PATH=/app/profiles \
   -v "$PWD/tests/data/rocrate_validator_profiles:/app/profiles:ro" \
   ghcr.io/esciencelab/ro-crate-validation-service-fivesafes-profile:latest
 ```
