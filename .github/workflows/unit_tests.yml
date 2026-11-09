@@ -1,8 +1,21 @@
 name: Unit Tests
 
 on:
+  push:
+    branches: [ develop, main ]
   pull_request:
-    branches: [ develop ]
+    branches: [ develop, main ]
+    paths:
+      - app/**
+      - tests/**
+      - requirements*.txt
+      - pyproject.toml
+      - Dockerfile
+      - docker-compose*.yml
+      - .dockerignore
+      - example.env
+      - wsgi.py
+      - .github/workflows/unit_tests.yml
 
 jobs:
   test:
