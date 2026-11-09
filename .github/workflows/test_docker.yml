@@ -15,6 +15,7 @@ on:
       - .dockerignore
       - example.env
       - wsgi.py
+      - .github/workflows/test_docker.yml
 
 jobs:
   test:
