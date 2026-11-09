@@ -4,7 +4,5 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    groups:
-      weekly-batch:
-        patterns:
-          - "*"
+      # disable version update PRs
+      open-pull-requests-limit: 0
