@@ -318,8 +318,9 @@ The RustFS console is at `http://localhost:9001` (default credentials are
 
 To validate against profiles other than the bundled ones, mount a profiles
 directory into **both** the flask and worker containers (metadata validation
-runs in flask; crate validation runs in the worker) and set `PROFILES_PATH` to
-the mounted path. See `docker-compose-develop.yml` for a working example.
+runs in flask; crate validation runs in the worker) and set `EXTRA_PROFILES_PATH`
+to the mounted path. This keeps the bundled base profiles available to the
+custom profiles. See `docker-compose-develop.yml` for a working example.
 
 ## Development
 
