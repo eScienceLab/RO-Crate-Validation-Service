@@ -13,9 +13,10 @@ def flask_app():
     with app.app_context():
         yield app
 
-#@patch("app.services.profile_service.get_profiles")
+@patch("app.services.profile_service.get_profiles")
 def test_get_profiles_returns_json_list_of_profiles(mock_list, flask_app):
+    mock_list.return_value = ["profile1", "profile2", "profile3"]
     response, status = get_profiles()
     assert status == 202
-    assert type(response.json.get("profiles", ())) == list
-    #mock_list.assert_called_once()
+    assert response.json == {"profiles": ["profile1", "profile2", "profile3"]}
+    mock_list.assert_called_once()
