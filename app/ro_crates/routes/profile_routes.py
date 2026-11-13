@@ -1,5 +1,7 @@
 """GET endpoints for retreiving profile details."""
 
+from app.services.profile_service import get_profiles
+
 from apiflask import APIBlueprint
 from flask import Response
 
@@ -14,6 +16,6 @@ def get_profiles() -> tuple[Response, int]:
     Returns:
     - A tuple containing the list of profiles and an HTTP status code.
     """
-    # Placeholder implementation; replace with actual logic to retrieve profiles
-    profiles = ["profile1", "profile2", "profile3"]
+
+    profiles = get_profiles()  # This function should be defined to fetch the profiles
     return {"profiles": profiles}, 200
