@@ -175,3 +175,16 @@ def test_metadata_route_available_when_storage_disabled(client: FlaskClient):
 
         assert response.status_code == 200
         mock_run.assert_called_once()
+
+
+# Test GET API: /v1/ro_crates/profiles
+
+def test_get_profiles_returns_list(storage_client):
+    with patch("app.ro_crates.routes.profile_routes.get_profiles") as mock_get:
+        #mock_get.return_value = ({"profiles": ["profile1", "profile2", "profile3"]}, 200)
+
+        response = storage_client.get("/v1/ro_crates/profiles")
+
+        assert response.status_code == 200
+        assert response.json == {"profiles": ["profile1", "profile2", "profile3"]}
+        #mock_get.assert_called_once()
