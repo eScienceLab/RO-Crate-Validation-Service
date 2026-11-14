@@ -63,7 +63,7 @@ colorlog==6.12.0
     # via roc-validator
 cryptography==50.0.1
     # via moto
-dnspython==2.9.0
+dnspython==2.9.2
     # via email-validator
 email-validator==2.3.0
     # via pydantic
