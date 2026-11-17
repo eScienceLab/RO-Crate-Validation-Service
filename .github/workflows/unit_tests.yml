@@ -1,8 +1,25 @@
 name: Unit Tests
 
 on:
+  push:
+    branches: [ develop, main ]
+    paths:
+      - '**'
+      - '!docs/**'
+      - '!mkdocs.yml'
+      - '!README.md'
+      - '!.github'
+      - '.github/workflows/unit_tests.yml'
   pull_request:
-    branches: [ develop ]
+    branches: [ develop, main ]
+    paths:
+      - '**'
+      - '!docs/**'
+      - '!mkdocs.yml'
+      - '!README.md'
+      - '!.github'
+      - '.github/workflows/unit_tests.yml'
+
 
 jobs:
   test:
