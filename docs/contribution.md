@@ -73,7 +73,7 @@ pip-compile --extra dev pyproject.toml -o requirements-dev.txt
 
 ## Continuous Integration
 
-Pull requests to `develop` will trigger three workflows: unit tests, integration tests (which start the Compose stack), and lint (`ruff check` and `ruff format --check`).
+Pull requests and pushes to `develop` or `main` that modify application relevant files will trigger three workflows: unit tests, integration tests (which start the Compose stack), and lint (`ruff check` and `ruff format --check`). These documentation pages are published on pushes to `main` that modify the documentation source code. The RO-Crate Validator docker containers are built when new version releases are made.
 
 ## How the API works
 
