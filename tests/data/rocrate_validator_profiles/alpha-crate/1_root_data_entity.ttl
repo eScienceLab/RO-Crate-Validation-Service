@@ -29,18 +29,9 @@ alpha-crate:RootDataEntityRequiredProperties
 
     sh:property [
         a sh:PropertyShape ;
-        sh:name "sourceOrganization" ;
-        sh:path schema:sourceOrganization;
+        sh:name "datePublished" ;
+        sh:path schema:datePublished;
         sh:minCount 1 ;
         sh:severity sh:Violation ;
-        sh:message """The Root Data Entity MUST have a `sourceOrganization` property.""" ;
-    ] ;
-
-    sh:property [
-        a sh:PropertyShape ;
-        sh:name "sourceOrganization" ;
-        sh:path schema:sourceOrganization ;
-        sh:class schema:Project ;
-        sh:severity sh:Violation ;
-        sh:message """The `sourceOrganization` property of the RootDataEntity MUST point to a Project entity.""" ;
+        sh:message """The Root Data Entity MUST have a `datePublished` property.""" ;
     ] .
