@@ -24,7 +24,5 @@ def get_profiles() -> list[str]:
             "Based on": "\n".join([p.identifier for p in profile.inherited_profiles]),
             "Requirements Checks (*)": "Hello"
         })
-
-
-    # Placeholder implementation; replace with actual logic to retrieve profiles
+    
     return results

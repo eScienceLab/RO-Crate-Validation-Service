@@ -24,9 +24,9 @@ def test_get_profiles_calls_runner(mock_list, flask_app):
 
 def test_get_profiles(flask_app):
     response = get_profiles()
-    profiles = response.get("profiles", [])
-    assert len(profiles) > 0
-    for profile in profiles:
+    assert isinstance(response, list), f"Expected list, got {type(response)}"
+    assert len(response) > 0
+    for profile in response:
         assert isinstance(profile.get("Identifier", None), str), f"Profile missing Identifier: {profile}"
         assert isinstance(profile.get("Name", None), str), f"Profile missing Name: {profile}"
         assert isinstance(profile.get("Description", None), str), f"Profile missing Description: {profile}"

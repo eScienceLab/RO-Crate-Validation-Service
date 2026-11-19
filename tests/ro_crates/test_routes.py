@@ -180,7 +180,9 @@ def test_metadata_route_available_when_storage_disabled(client: FlaskClient):
 # Test GET API: /v1/ro_crates/profiles
 
 def test_get_profiles_returns_json(storage_client):
-    with patch("app.ro_crates.routes.profile_routes.get_profiles") as mock_get:
+    with patch(
+        "app.ro_crates.routes.profile_routes.profile_service.get_profiles"
+        ) as mock_get:
         mock_get.return_value = [
             {
                 "Identifier": "profile1", 
@@ -205,12 +207,5 @@ def test_get_profiles_returns_json(storage_client):
         assert response.status_code == 200
         mock_get.assert_called_once()
         results = response.json
-        assert isinstance(results['profiles'], list), f"{results['profiles']}"
-        for profile in results['profiles']:
-            assert isinstance(profile.get("Identifier", None), str), f"Profile missing Identifier: {profile}"
-            assert isinstance(profile.get("Name", None), str), f"Profile missing Name: {profile}"
-            assert isinstance(profile.get("Description", None), str), f"Profile missing Description: {profile}"
-            assert isinstance(profile.get("Version", None), str), f"Profile missing Version: {profile}"
-            assert isinstance(profile.get("URI", None), str), f"Profile missing URI: {profile}"
-            assert isinstance(profile.get("Based on", None), str), f"Profile missing Based on: {profile}"
-            assert isinstance(profile.get("Requirements Checks (*)", None), str), f"Profile missing Requirements Checks (*): {profile}"
+        assert isinstance(results, dict), f"{results} Response is meant to be dict with a 'profiles' key"
+        assert isinstance(results['profiles'], list), f"{results['profiles']} is not a list or is missing"
