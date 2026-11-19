@@ -27,4 +27,4 @@ def get_profiles() -> list[str]:
 
 
     # Placeholder implementation; replace with actual logic to retrieve profiles
-    return {"profiles": results}
+    return results
