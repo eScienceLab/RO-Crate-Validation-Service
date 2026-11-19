@@ -1,3 +1,16 @@
+"""Runs rocrate_validator and adapts its output.
+
+This is the boundary to the external profiles fetcher.
+"""
+
+import logging
+from typing import Optional
+
+from rocrate_validator import services
+
+
+logger = logging.getLogger(__name__)
+
 def get_profiles() -> list[str]:
     """
     Retrieve a list of available RO-Crate validation profiles using rocrate-validator.
@@ -6,4 +19,4 @@ def get_profiles() -> list[str]:
     - A list of profiles available.
     """
     
-    return ["profile1", "profile2", "profile3"]
+    return services.get_profiles()
