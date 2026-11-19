@@ -185,6 +185,7 @@ def test_validation_with_explicit_profile():
     assert result.status_code == 200
     assert result.json()["status"] == "invalid"
 
+
 def test_get_profiles():
     """A request to get profiles is accepted and produces a result."""
 
@@ -193,10 +194,16 @@ def test_get_profiles():
     results = response.json()
     assert isinstance(results, dict), f"{results}"
     assert "profiles" in results, f"Response missing 'profiles' key: {results}"
-    for profile in results['profiles']:
-        assert isinstance(profile.get("Identifier", None), str), f"Profile missing Identifier: {profile}"
+    for profile in results["profiles"]:
+        assert isinstance(profile.get("Identifier", None), str), (
+            f"Profile missing Identifier: {profile}"
+        )
         assert isinstance(profile.get("Name", None), str), f"Profile missing Name: {profile}"
-        assert isinstance(profile.get("Description", None), str), f"Profile missing Description: {profile}"
+        assert isinstance(profile.get("Description", None), str), (
+            f"Profile missing Description: {profile}"
+        )
         assert isinstance(profile.get("Version", None), str), f"Profile missing Version: {profile}"
         assert isinstance(profile.get("URI", None), str), f"Profile missing URI: {profile}"
-        assert isinstance(profile.get("Based on", None), str), f"Profile missing Based on: {profile}"
+        assert isinstance(profile.get("Based on", None), str), (
+            f"Profile missing Based on: {profile}"
+        )

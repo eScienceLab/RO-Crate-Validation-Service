@@ -1,15 +1,14 @@
 """GET endpoints for retreiving profile details."""
 
-from app.services import profile_service
-
 from apiflask import APIBlueprint
-from flask import Response
+
+from app.services import profile_service
 
 profile_routes_bp = APIBlueprint("profile_routes", "Profiles")
 
 
 @profile_routes_bp.get("/profiles")
-def get_profiles() -> tuple[Response, int]:
+def get_profiles():
     """
     Retrieve a list of available RO-Crate validation profiles.
 
@@ -17,5 +16,5 @@ def get_profiles() -> tuple[Response, int]:
     - A tuple containing the list of profiles and an HTTP status code.
     """
 
-    profiles = profile_service.get_profiles()  # This function should be defined to fetch the profiles
+    profiles = profile_service.get_profiles()
     return {"profiles": profiles}, 200

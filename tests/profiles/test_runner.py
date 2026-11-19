@@ -1,7 +1,5 @@
 """Tests for the profiles runner that wraps rocrate_validator."""
 
-import json
-
 from app.profiles import runner
 
 

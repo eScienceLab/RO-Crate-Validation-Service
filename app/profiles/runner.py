@@ -4,19 +4,19 @@ This is the boundary to the external profiles fetcher.
 """
 
 import logging
-from typing import Optional
 
 from rocrate_validator import services
-
+from rocrate_validator.models import Profile
 
 logger = logging.getLogger(__name__)
 
-def get_profiles() -> list[str]:
+
+def get_profiles() -> list[Profile]:
     """
     Retrieve a list of available RO-Crate validation profiles using rocrate-validator.
 
     Returns:
     - A list of profiles available.
     """
-    
+
     return services.get_profiles()
