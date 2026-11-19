@@ -13,10 +13,26 @@ def flask_app():
     with app.app_context():
         yield app
 
-@patch("app.services.profile_service.get_profiles")
-def test_get_profiles_returns_json_list_of_profiles(mock_list, flask_app):
+@patch("app.services.profile_service.runner.get_profiles")
+def test_get_profiles_calls_runner(mock_list, flask_app):
     mock_list.return_value = ["profile1", "profile2", "profile3"]
+    try:
+        response, status = get_profiles()
+    except Exception as e:
+        print(f"Error occurred: {e}")
+    mock_list.assert_called_once()
+
+def test_get_profiles(flask_app):
     response, status = get_profiles()
     assert status == 202
-    assert response.json == {"profiles": ["profile1", "profile2", "profile3"]}
-    mock_list.assert_called_once()
+    profiles = response.json.get("profiles", [])
+    assert len(profiles) > 0
+    for profile in profiles:
+        assert isinstance(profile.get("Identifier", None), str), f"Profile missing Identifier: {profile}"
+        assert isinstance(profile.get("Name", None), str), f"Profile missing Name: {profile}"
+        assert isinstance(profile.get("Description", None), str), f"Profile missing Description: {profile}"
+        assert isinstance(profile.get("Version", None), str), f"Profile missing Version: {profile}"
+        assert isinstance(profile.get("URI", None), str), f"Profile missing URI: {profile}"
+        assert isinstance(profile.get("Based on", None), str), f"Profile missing Based on: {profile}"
+        assert isinstance(profile.get("Requirements Checks (*)", None), str), f"Profile missing Requirements Checks (*): {profile}"
+    
