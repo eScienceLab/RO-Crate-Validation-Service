@@ -190,8 +190,7 @@ def test_get_profiles_returns_json(storage_client):
                 "Description": "A sample profile", 
                 "Version": "1.0", 
                 "URI": "https://example.com/profile1", 
-                "Based on": "", 
-                "Requirements Checks (*)": ""
+                "Based on": "",
             },
             {
                 "Identifier": "profile2", 
@@ -199,8 +198,7 @@ def test_get_profiles_returns_json(storage_client):
                 "Description": "Another sample profile", 
                 "Version": "2.0", 
                 "URI": "https://example.com/profile2", 
-                "Based on": "", 
-                "Requirements Checks (*)": ""
+                "Based on": "",
             }
         ]
         response = storage_client.get("/v1/ro_crates/profiles")

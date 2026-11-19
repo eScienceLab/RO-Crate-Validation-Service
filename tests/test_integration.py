@@ -200,4 +200,3 @@ def test_get_profiles():
         assert isinstance(profile.get("Version", None), str), f"Profile missing Version: {profile}"
         assert isinstance(profile.get("URI", None), str), f"Profile missing URI: {profile}"
         assert isinstance(profile.get("Based on", None), str), f"Profile missing Based on: {profile}"
-        assert isinstance(profile.get("Requirements Checks (*)", None), str), f"Profile missing Requirements Checks (*): {profile}"

@@ -21,8 +21,7 @@ def get_profiles() -> list[str]:
             "Description": profile.description if profile.description is not None else "N/A",
             "Version": profile.version if profile.version is not None else "N/A",
             "URI": profile.uri if profile.uri is not None else "N/A",
-            "Based on": "\n".join([p.identifier for p in profile.inherited_profiles]),
-            "Requirements Checks (*)": "Hello"
+            "Based on": "\n".join([p.identifier for p in profile.inherited_profiles]) if profile.inherited_profiles else "N/A"
         })
     
     return results
