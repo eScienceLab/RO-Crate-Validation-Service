@@ -17,15 +17,14 @@ def flask_app():
 def test_get_profiles_calls_runner(mock_list, flask_app):
     mock_list.return_value = ["profile1", "profile2", "profile3"]
     try:
-        response, status = get_profiles()
+        response = get_profiles()
     except Exception as e:
         print(f"Error occurred: {e}")
     mock_list.assert_called_once()
 
 def test_get_profiles(flask_app):
-    response, status = get_profiles()
-    assert status == 202
-    profiles = response.json.get("profiles", [])
+    response = get_profiles()
+    profiles = response.get("profiles", [])
     assert len(profiles) > 0
     for profile in profiles:
         assert isinstance(profile.get("Identifier", None), str), f"Profile missing Identifier: {profile}"
