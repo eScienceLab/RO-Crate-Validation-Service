@@ -8,7 +8,7 @@ from flask import jsonify, request
 from app.crates.ids import InvalidCrateId
 from app.crates.resolver import AmbiguousCrate, CrateNotFound
 from app.health import health_bp
-from app.ro_crates.routes import v1_minio_get_bp, v1_minio_post_bp, v1_post_bp
+from app.ro_crates.routes import v1_minio_get_bp, v1_minio_post_bp, v1_post_bp, v1_profile_bp
 from app.services.logging_service import (
     get_request_id,
     new_request_id,
@@ -62,6 +62,7 @@ def create_app(settings: Settings | None = None) -> APIFlask:
     # Always available:
     app.register_blueprint(health_bp)
     app.register_blueprint(v1_post_bp, url_prefix="/v1/ro_crates")
+    app.register_blueprint(v1_profile_bp, url_prefix="/v1/ro_crates")
 
     # Object storage is optional and disabled by default. Only register the
     # ID-based, store-backed routes when storage is enabled.

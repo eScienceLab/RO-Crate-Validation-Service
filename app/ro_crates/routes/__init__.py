@@ -2,9 +2,11 @@
 
 from app.ro_crates.routes.get_routes import get_routes_bp
 from app.ro_crates.routes.post_routes import minio_post_routes_bp, post_routes_bp
+from app.ro_crates.routes.profile_routes import profile_routes_bp
 
 # Always registered:
 v1_post_bp = post_routes_bp
+v1_profile_bp = profile_routes_bp
 
 # Registered only when object storage is enabled:
 v1_minio_post_bp = minio_post_routes_bp

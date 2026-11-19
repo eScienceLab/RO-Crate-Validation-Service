@@ -175,3 +175,38 @@ def test_metadata_route_available_when_storage_disabled(client: FlaskClient):
 
         assert response.status_code == 200
         mock_run.assert_called_once()
+
+
+# Test GET API: /v1/ro_crates/profiles
+
+
+def test_get_profiles_returns_json(storage_client):
+    with patch("app.ro_crates.routes.profile_routes.profile_service.get_profiles") as mock_get:
+        mock_get.return_value = [
+            {
+                "Identifier": "profile1",
+                "Name": "Profile 1",
+                "Description": "A sample profile",
+                "Version": "1.0",
+                "URI": "https://example.com/profile1",
+                "Based on": "",
+            },
+            {
+                "Identifier": "profile2",
+                "Name": "Profile 2",
+                "Description": "Another sample profile",
+                "Version": "2.0",
+                "URI": "https://example.com/profile2",
+                "Based on": "",
+            },
+        ]
+        response = storage_client.get("/v1/ro_crates/profiles")
+        assert response.status_code == 200
+        mock_get.assert_called_once()
+        results = response.json
+        assert isinstance(results, dict), (
+            f"{results} Response is meant to be dict with a 'profiles' key"
+        )
+        assert isinstance(results["profiles"], list), (
+            f"{results['profiles']} is not a list or is missing"
+        )
