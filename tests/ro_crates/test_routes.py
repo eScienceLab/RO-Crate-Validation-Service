@@ -179,12 +179,38 @@ def test_metadata_route_available_when_storage_disabled(client: FlaskClient):
 
 # Test GET API: /v1/ro_crates/profiles
 
-def test_get_profiles_returns_list(storage_client):
+def test_get_profiles_returns_json(storage_client):
     with patch("app.ro_crates.routes.profile_routes.get_profiles") as mock_get:
-        mock_get.return_value = ["profile1", "profile2", "profile3"]
-
+        mock_get.return_value = [
+            {
+                "Identifier": "profile1", 
+                "Name": "Profile 1", 
+                "Description": "A sample profile", 
+                "Version": "1.0", 
+                "URI": "https://example.com/profile1", 
+                "Based on": "", 
+                "Requirements Checks (*)": ""
+            },
+            {
+                "Identifier": "profile2", 
+                "Name": "Profile 2", 
+                "Description": "Another sample profile", 
+                "Version": "2.0", 
+                "URI": "https://example.com/profile2", 
+                "Based on": "", 
+                "Requirements Checks (*)": ""
+            }
+        ]
         response = storage_client.get("/v1/ro_crates/profiles")
-
         assert response.status_code == 200
-        assert response.json == {"profiles": ["profile1", "profile2", "profile3"]}
         mock_get.assert_called_once()
+        results = response.json
+        assert isinstance(results['profiles'], list), f"{results['profiles']}"
+        for profile in results['profiles']:
+            assert isinstance(profile.get("Identifier", None), str), f"Profile missing Identifier: {profile}"
+            assert isinstance(profile.get("Name", None), str), f"Profile missing Name: {profile}"
+            assert isinstance(profile.get("Description", None), str), f"Profile missing Description: {profile}"
+            assert isinstance(profile.get("Version", None), str), f"Profile missing Version: {profile}"
+            assert isinstance(profile.get("URI", None), str), f"Profile missing URI: {profile}"
+            assert isinstance(profile.get("Based on", None), str), f"Profile missing Based on: {profile}"
+            assert isinstance(profile.get("Requirements Checks (*)", None), str), f"Profile missing Requirements Checks (*): {profile}"
