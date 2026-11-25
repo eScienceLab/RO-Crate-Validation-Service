@@ -8,7 +8,7 @@ outcome rather than a string, so callers never have to type-check the result.
 import logging
 from typing import Optional
 
-from rocrate_validator import services
+from rocrate_validator import services, errors
 
 from app.validation.results import ValidationOutcome
 
@@ -49,6 +49,12 @@ def validate_metadata(
     created_at: Optional[str] = None,
 ) -> ValidationOutcome:
     """Validate an in-memory RO-Crate metadata graph."""
+    if profile_name and not check_profile_exists(profile_name, profiles_path, extra_profiles_path):
+        return ValidationOutcome.from_error(
+            f"Profile '{profile_name}' not found in bundled or configured profiles",
+            profile=profile_name,
+            created_at=created_at,
+        )
     return _run(
         {"metadata_only": True, "metadata_dict": metadata},
         profile_name=profile_name,
@@ -59,6 +65,25 @@ def validate_metadata(
         offline=offline,
         created_at=created_at,
     )
+
+
+def check_profile_exists(
+    profile_name: Optional[str] = None,
+    profiles_path: Optional[str] = None,
+    extra_profiles_path: Optional[str] = None,
+) -> bool:
+    """Check if a profile exists in the bundled or configured profiles."""
+    options = {"profile_identifier": profile_name}
+    if profiles_path:
+        options["profiles_path"] = profiles_path
+    if extra_profiles_path:
+        options["extra_profiles_path"] = extra_profiles_path
+
+    try:
+        services.get_profile(**options)
+        return True
+    except (errors.ProfileNotFound, errors.InvalidProfilePath):
+        return False
 
 
 def _run(

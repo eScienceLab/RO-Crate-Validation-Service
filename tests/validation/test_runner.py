@@ -33,6 +33,9 @@ class FakeServices:
         if self._raises is not None:
             raise self._raises
         return self._result
+    
+    def get_profile(self, **kwargs):
+        return self._result
 
 
 def test_validate_metadata_success_is_valid(monkeypatch):
@@ -107,3 +110,10 @@ def test_offline_and_cache_omitted_when_not_set(monkeypatch):
     assert "cache_path" not in s
     # offline defaults to False and is only forwarded when enabled
     assert s.get("offline", False) is False
+
+
+def test_check_profile_exists_correct_for_existing_missing_profiles():
+    assert runner.check_profile_exists("ro-crate")
+    assert not runner.check_profile_exists("hahaha")
+    assert not runner.check_profile_exists(profiles_path="/tmp/does-not-exist")
+    assert not runner.check_profile_exists(extra_profiles_path="/tmp/does-not-exist")
