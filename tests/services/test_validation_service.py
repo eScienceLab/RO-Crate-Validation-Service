@@ -95,6 +95,12 @@ def test_run_metadata_validation_valid_is_200(mock_check_profile, mock_validate,
     )
 
     response, status = run_metadata_validation('{"@graph": []}', "ro-crate", "/app/profiles")
+    
+    mock_check_profile.assert_called_once_with(
+        profile_name="ro-crate",
+        profiles_path="/app/profiles",
+        extra_profiles_path=None
+    )
 
     assert status == 200
     assert response.json["status"] == "valid"
@@ -106,6 +112,19 @@ def test_run_metadata_validation_valid_is_200(mock_check_profile, mock_validate,
         cache_path=None,
         offline=False,
     )
+
+@patch("app.services.validation_service.check_profile_exists", return_value=True)
+def test_run_metadata_validation_profile_not_found(mock_check_profile, flask_app):
+    response, status = run_metadata_validation('{"@graph": []}', "nonexistent-profile", "/app/profiles")
+    
+    mock_check_profile.assert_called_once_with(
+        profile_name="nonexistent-profile",
+        profiles_path="/app/profiles",
+        extra_profiles_path=None
+    )
+
+    assert status == 404
+    assert "Profile 'nonexistent-profile' not found" in response.json["error"]
 
 
 @patch("app.services.validation_service.validate_metadata")

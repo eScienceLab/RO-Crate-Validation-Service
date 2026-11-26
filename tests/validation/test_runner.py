@@ -117,3 +117,4 @@ def test_check_profile_exists_correct_for_existing_missing_profiles():
     assert not runner.check_profile_exists("hahaha")
     assert not runner.check_profile_exists(profiles_path="/tmp/does-not-exist")
     assert not runner.check_profile_exists(extra_profiles_path="/tmp/does-not-exist")
+    assert runner.check_profile_exists()
