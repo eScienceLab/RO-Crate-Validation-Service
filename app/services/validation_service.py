@@ -13,7 +13,7 @@ from app.storage.s3 import S3Backend
 from app.tasks.validation_tasks import process_validation_task_by_id
 from app.utils.config import InvalidAPIUsage
 from app.validation.results import ValidationStatus
-from app.validation.runner import validate_metadata
+from app.validation.runner import validate_metadata, check_profile_exists
 
 logger = logging.getLogger(__name__)
 
@@ -22,6 +22,22 @@ def _build_storage() -> S3Backend:
     """Build the storage backend from server-side settings."""
     settings = current_app.config["SETTINGS"]
     return S3Backend.from_settings(settings)
+
+
+def is_profile_exists(
+    profile_name: str | None = None,
+    profiles_path: str | None = None,
+    extra_profiles_path: str | None = None,
+) -> bool:
+    """
+    Check if a validation profile exists in the bundled or configured profiles.
+
+    :param profile_name: The name of the profile to check.
+    :param profiles_path: Optional path to a directory of profiles that replaces the bundled set.
+    :param extra_profiles_path: Optional path to a directory of profiles that is added to the bundled set.
+    :return: True if the profile exists, False otherwise.
+    """
+    return check_profile_exists(profile_name, profiles_path, extra_profiles_path)
 
 
 def queue_ro_crate_validation_task(
@@ -83,6 +99,9 @@ def run_metadata_validation(
 
     if not metadata:
         return jsonify({"error": "Required parameter crate_json is empty"}), 422
+    
+    if not check_profile_exists(profile_name, profiles_path, extra_profiles_path):
+        return jsonify({"error": f"Profile '{profile_name}' not found in bundled or configured profiles"}), 422
 
     outcome = validate_metadata(
         metadata,
