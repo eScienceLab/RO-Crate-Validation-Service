@@ -49,12 +49,12 @@ def validate_metadata(
     created_at: Optional[str] = None,
 ) -> ValidationOutcome:
     """Validate an in-memory RO-Crate metadata graph."""
-    if profile_name and not check_profile_exists(profile_name, profiles_path, extra_profiles_path):
-        return ValidationOutcome.from_error(
-            f"Profile '{profile_name}' not found in bundled or configured profiles",
-            profile=profile_name,
-            created_at=created_at,
-        )
+    # if profile_name and not check_profile_exists(profile_name, profiles_path, extra_profiles_path):
+    #     return ValidationOutcome.from_error(
+    #         f"Profile '{profile_name}' not found in bundled or configured profiles",
+    #         profile=profile_name,
+    #         created_at=created_at,
+    #     )
     return _run(
         {"metadata_only": True, "metadata_dict": metadata},
         profile_name=profile_name,
@@ -78,6 +78,9 @@ def check_profile_exists(
         options["profiles_path"] = profiles_path
     if extra_profiles_path:
         options["extra_profiles_path"] = extra_profiles_path
+    
+    if not profile_name and not profiles_path and not extra_profiles_path:
+        return True  # no profile specified, so nothing to check
 
     try:
         services.get_profile(**options)
