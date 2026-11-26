@@ -101,7 +101,7 @@ def run_metadata_validation(
         return jsonify({"error": "Required parameter crate_json is empty"}), 422
     
     if not check_profile_exists(profile_name, profiles_path, extra_profiles_path):
-        return jsonify({"error": f"Profile '{profile_name}' not found in bundled or configured profiles"}), 422
+        return jsonify({"error": f"Profile '{profile_name}' not found in bundled or configured profiles"}), 404
 
     outcome = validate_metadata(
         metadata,

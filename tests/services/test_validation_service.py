@@ -88,7 +88,8 @@ def test_queue_ambiguous_propagates_without_queueing(
 
 
 @patch("app.services.validation_service.validate_metadata")
-def test_run_metadata_validation_valid_is_200(mock_validate, flask_app):
+@patch("app.services.validation_service.check_profile_exists", return_value=True)
+def test_run_metadata_validation_valid_is_200(mock_check_profile, mock_validate, flask_app):
     mock_validate.return_value = ValidationOutcome(
         status=ValidationStatus.VALID, profile="ro-crate", detail={"report": "ok"}
     )
